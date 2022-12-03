@@ -62,4 +62,16 @@ okay so the only thing that comes to mind is that we give each one its own class
 
 okay take 2, i want to break all of this down even more so it looks more like code
 
-the first function that i'm going to focus on is 
+WOAH WOAH WOAAHHHh okay so each thing ive specified before will have its own function solely for the styling of the webpage which i can then use wherever appropiate in my event handlers/functions for the most part though, i want everything to be in the same place, somethings will not be visible at times but yeaahhh
+
+okay take 3 
+
+so the way that I am going to break this all down is by going in a circle, i'll start with what my codes main function (the quiz), to then handling the completion page, and then the high scores view, to finally completing the page that will be the inital page to this website, the welcome page
+
+---------------------------------------------    FUNCTION: REDESIGN OF HTML FOR FIRST QUESTION IN JAVASCRIPT ---------------------------------------------
+
+OKAY SO THE GOAL HERE IS TO MANIPULATE THE mainContent ELEMENT SO THAT ITS A FORM
+
+THEN FROM HERE WE ARE GOING TO ADD EACH ITEM THAT WILL BE A BUTTON TYPE AND WILL EACH HAVE THEIR OWN VALUES
+
+---------------------------------------------    FUNCTION:  ---------------------------------------------
