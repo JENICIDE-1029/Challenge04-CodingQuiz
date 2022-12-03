@@ -1,0 +1,19 @@
+/* .header {
+    display:inline-block;
+} */
+
+ .viewHigh {
+    display:inline-block;
+}
+
+.timer {
+    float: right;
+    padding-right:10px;
+}
+
+main {
+    display: block;
+    justify-content: center;
+    align-content: center;
+
+}
