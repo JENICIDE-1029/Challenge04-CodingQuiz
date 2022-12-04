@@ -139,16 +139,58 @@ formCreation.appendChild(response2q1);
 formCreation.appendChild(response3q1);
 formCreation.appendChild(response4q1);
 
-these last two is what we are finally adding back to the main content
+these last two is what we are finally adding back to the main content and now i can finally close this function
 mainContent.appendChild(question1);
 mainContent.appendChild(formCreation);
 mainContent.appendChild(mainLabel);
 
+i dont tjink i actually defined this as a function at the start lol but im gonna call it 
+quizQuestion1();
+
 okay so the functionality from before could def use some loops that could also consider how we test for if a user got a question correct and if they are within the right timeframe
 
-after reviewing mini project 28 i think my code needs to be broken down even more 
+after reviewing mini project 28 i think my code needs to be broken down even more BUTTTTT I will not let it discourage me!!!! I will continue on with my plan and once its done i know i'll be able to pick it apart and piece it back together easily 
 
 
 THEN FROM HERE WE ARE GOING TO ADD EACH ITEM THAT WILL BE A BUTTON TYPE AND WILL EACH HAVE THEIR OWN VALUES
 
 ---------------------------------------------    FUNCTION:  ---------------------------------------------
+
+as a recap, i've created all  of the child tags within the parent of mainParentEl then i added more children to their children along with defining seperate values with their contents. Then the contents were appended to the youngest of children and when they all are connected we append them one last time to their parents which are the immediate descendents of mainParentEl this is done to achieve the new format of the page, mind you, i still havent loaded up all of the form options since the way im starting out feels like a lot of work but with them in arrays i think it should be possible to throw them in a loop so i dont have to write each one lol
+
+i see some opportonity for more functionality missing in what im already doing, which is in adding the value to buttons of the form and giving them a function where if something was selected wrong then it needs to push out this function in order to change the users score, move to the next question, end if time runs out, account for time spent, and display a label telling them if they were right or wrong
+
+then i have to create the format for when the page reached the completion page and how things will look if they win or lose 
+that also allows the user to submit their name to our high scores list
+
+finally i will have to create a high score page that will list off all of our submitted users and have a button to take you to the beginning and another to delte all of the scores
+
+so when the game starts, what is it that needs to happen instantly
+- we move into the first set of questions (view is changed)
+- timer starts
+
+
+if nothing is selected and the user just stays there until the clock runs out then i'll need the following, i think people should only lose if they ran out of time.....yes?
+- completion page (view is changed) 
+- you've lost
+
+if something is selected 
+- record score
+- move onto next question (view is changed)
+- if answer was correct or wrong then display that in label
+
+if user answers all questions within time, they will also reach the completion page
+- display score
+- allow user to enter name input 
+- let users submit their name and score 
+
+
+if and once the user submits their name correctly, i will finally record it and take them to the final view of the high scores
+- the high scores list will be displayed (view is changed)
+- a button to delete 
+- button to start again
+
+
+
+
+

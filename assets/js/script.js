@@ -39,13 +39,13 @@ newBigText.appendChild(questionOne);
 response1.appendChild(response1Text);
 newMainContent.appendChild(response1);
 
-mainVar[0].innerHTML = ''; 
+mainVar[0].innerHTML = ' '; 
 
 document.getElementById("mainParentEl").appendChild(newBigText);
 document.getElementById("mainParentEl").appendChild(newMainContent);
 
 // mainVar.appendChild(newLabel);
-console.log(response1.textContent)
+console.log(response1.textContent);
 
 
 }
