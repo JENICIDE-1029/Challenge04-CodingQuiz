@@ -1,8 +1,18 @@
-/* .header {
-    display:inline-block;
-} */
+* {
+    box-sizing: border-box;
+  }
 
- .viewHigh {
+  body {
+    font-family: Arial;
+    margin: 0;
+    /* this will take up the entirety of the background */
+    min-height: 100vh;
+    background: linear-gradient(0deg, rgba(19,41,61,1) 0%, rgba(237,245,249,1) 63%);
+
+    
+  }
+
+  .viewHigh {
     display:inline-block;
 }
 
@@ -11,9 +21,75 @@
     padding-right:10px;
 }
 
-main {
+  /* everything that is going to be within this main element will always be centered and right where we want it to be */
+  main {
+
+    min-height: 80vh;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+#bigText {
+    font-size:50px;
+    margin-bottom: 0px;
+}
+
+#mainContentChild {
+    font-size: 30px;
+}
+
+#startBtn {
+    background: white;
+    border-radius: 8px;
+    color: #13293d;
+    cursor:pointer;
+    font-size: 2em;
+    letter-spacing: 0.21px;
+    line-height: 16px;
+    max-width: 255px;
+    padding: 20px 52px;
+    text-align: center;
+
+    transition-duration: 0.15s;
+    transition-property: background-color;
+    transition-timing-function: linear;
+    margin-top: 0.6em;
+  }
+
+  #label {
+    padding:30px;
+    color: white;  
+    }
+
+/* main {
     display: block;
     justify-content: center;
     align-content: center;
 
+} */
+/* 
+.titleText {
+    display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
 }
+
+.mainContent {
+    display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.startBtn {
+    display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+} */
