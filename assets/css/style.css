@@ -27,11 +27,13 @@
     min-height: 80vh;
     display:flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-left: 15%;
-    padding-right: 15%;
+    margin-left: 15%;
+    margin-right: 15%;
+
 }
 
 #bigText {
@@ -51,9 +53,30 @@
     font-size: 2em;
     letter-spacing: 0.21px;
     line-height: 16px;
-    max-width: 255px;
+    max-width: 450px;
     padding: 20px 52px;
     text-align: center;
+
+    transition-duration: 0.15s;
+    transition-property: background-color;
+    transition-timing-function: linear;
+    margin-top: 0.6em;
+  }
+
+  .startBtn {
+    background: white;
+    border-radius: 8px;
+    color: #13293d;
+    cursor:pointer;
+    font-size: 2em;
+    letter-spacing: 0.21px;
+    line-height: 16px;
+    max-width: 450px;
+    padding: 20px 52px;
+    text-align: center;
+    margin:10px;
+    width:100%;
+    /* display:block; */
 
     transition-duration: 0.15s;
     transition-property: background-color;

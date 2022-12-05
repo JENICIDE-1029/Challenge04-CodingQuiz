@@ -190,6 +190,11 @@ if and once the user submits their name correctly, i will finally record it and 
 - a button to delete 
 - button to start again
 
+if the user selects the start again button then they will be redirected 
+- display start page (view is changed)
+- everything is timed out and cleared 
+- submitted high scores will continue to be stored unless already delted 
+
 
 
 
