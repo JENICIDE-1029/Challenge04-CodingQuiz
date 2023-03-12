@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Coding Quiz Extravaganza!</title>
 </head>
+
 <body>
     <header class="header">
         <p class="viewHigh">View High Score</p>
-        <p class="timer">Time: <time></time></p>
+        <!-- i need to look into if i can use the time tag instead of div -->
+        <p class="timer">Time Remaining:
+            <span id="timerEl">75</span>
+        </p>
     </header>
 
+
     <main id="mainParentEl">
-     
+
         <h1 id="bigText">WELCOME TO THE CODING QUIZ 10,000!</h1>
-       
-        <p id="mainContentChild">
-            This quiz contains 4 multiple choice questions and you are required to answer them all under 75 seconds. Soooo, whenever you're ready just click the start button!!
+
+        <p id="mainMiddleContent">
+            This quiz contains 4 multiple choice questions and you are required to answer them all under 75 seconds.
+            Soooo, whenever you're ready just click the start button!!
 
         </p>
 
         <button id="startBtn">Start</button>
 
-        <label id="label">Created by Jennifer Gutierrez</label>
+        <label id="labelMessage">Created by Jennifer Gutierrez</label>
     </main>
     <script src="./assets/js/script.js"></script>
 </body>

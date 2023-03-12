@@ -167,7 +167,10 @@ finally i will have to create a high score page that will list off all of our su
 
 so when the game starts, what is it that needs to happen instantly
 - we move into the first set of questions (view is changed)
+    - a question will present and will change once a button is selected of which 
 - timer starts
+    - each question will have its own set of inputs
+    - 
 
 
 if nothing is selected and the user just stays there until the clock runs out then i'll need the following, i think people should only lose if they ran out of time.....yes?
@@ -195,6 +198,20 @@ if the user selects the start again button then they will be redirected
 - everything is timed out and cleared 
 - submitted high scores will continue to be stored unless already delted 
 
+
+new breakdown 
+when user is first presented with webpage they will view the startpage that will contain the following elements: timer, view high score, large title text, smaller descriptive text, a label, and a button
+
+- when the user selects the view high score then they will be able to see the high scores page
+
+- when the user selects the start button then the items on the screen are transformed to show the first question and set of options AND the timer begins AND when a user selects on an answer they are moved onto the next answer
+
+when the timer runs out the quiz is over and the display looks like the following 
+
+
+when the user reaches the end of the quiz they win 
+
+their scores are recorded 
 
 
 

@@ -1,80 +1,165 @@
-var response1 = ["strings","booleans","Alerts","numbers"]
-var questions = ["Commonly used data types DO not include: ","The condition in an if/else statement is enclosed with ________.","Arrays in JavaScript can be used to store ________.","String values must be enclosed within ________ when being assigned to variables.","A very useful tool used during development and debugging for printing content to the debugger is: "]
-var response2 = ["quotes","Curly brackets","paranthesis","square brackets"]
-var response3 = ["numbers and strings","other arrays","booleans","All of the above"]
-var response4 = ["commas","curly brackets","Quotes","parenthesis"]
-var response5 = ["JavaScript","terminal/bash","for loops","Console.log"]
+
+
+var startQuizBtn = document.getElementById("startBtn");
+var timerElement = document.getElementById("timerEl");
+var bigText = document.getElementById("bigText");
+var mainMiddleContent = document.getElementById("mainMiddleContent");
+var labelMessage = document.getElementById("labelMessage");
+var mainVar = document.getElementsByTagName("main");
+
+
+
+var timer;
+var timerCount;
+
+var questionCount = 0;
+
+//okay so by putting in the text of the element im going to use as my header just makes everything so much easier
+
+
+var labelArray = ["Created by Jennifer Gutierrez Manjares", "Correct! :) ", "Wrong! :( "]
 
 var scoreAmount = 0;
 
+//this will grab the high scores from local storage
+function init() {
+    getHighScores();
+};
+
+
+function startQuiz() {
+    //setting the score back to zero and the timer back to 60
+    scoreAmount = 0;
+    timerCount = 75;
+    //this sets off the function to make our questions appear
+    // renderQuestions();
+    //this sets off the function to make our timer begin
+    startTimer();
+};
+
+
+function startTimer() {
+    //this is the timer that will be used to count down from 60 seconds
+    timer = setInterval(function () {
+        timerCount--;
+        timerElement.textContent = timerCount;
+        //this is the condition that will end the quiz if the timer hits 0
+        if (timerCount === 0) {
+            clearInterval(timer);
+            endQuiz();
+        }
+    }, 1000);
+};
+
+
+// buttonTest.addEventListener("click", increment);
+
+
+var quizFormatArray = [
+    {
+        stimulus: "Commonly used data types DO not include: ",
+        correctAnswer: "Alerts",
+        responses: ["strings", "booleans", "Alerts", "numbers"]
+    }, {
+        stimulus: "The condition in an if/else statement is enclosed with ________.",
+        correctAnswer: "curly brackets",
+        responses: ["quotes", "Curly brackets", "paranthesis", "square brackets"]
+    }, {
+        stimulus: "Arrays in JavaScript can be used to store ________.",
+        correctAnswer: "All of the above",
+        responses: ["numbers and strings", "other arrays", "booleans", "All of the above"]
+    }, {
+        stimulus: "String values must be enclosed within ________ when being assigned to variables.",
+        correctAnswer: "Quotes",
+        responses: ["commas", "curly brackets", "Quotes", "parenthesis"]
+    }, {
+        stimulus: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        correctAnswer: "Console.log",
+        responses: ["JavaScript", "terminal/bash", "for loops", "Console.log"]
+    }
+
+];
+
+// console.log(quizFormatArray[0].stimulus);
+
+while (questionCount[0])
+
+
+    //this is the conjunctor function that will make our title appear
+    var Questions = function (arrayIndex) {
+
+        var newtextContent = quizFormatArray[i];
+
+        var questionOne = document.createTextNode(newtextContent);
+
+        newBigText.setAttribute("class", "bigText");
+
+        newBigText.appendChild(questionOne);
+        document.getElementById("mainParentEl").appendChild(newBigText);
+
+    };
+
+//i think in order to have the reponses change accordingly, i will need to attatch them somehow to the questions 
+//i am trying to add the click event procedure to all of my buttons so that they will show the next question and set of responses
+var NextQuestion = function (responseArray) {
+    for (i = 0; i < responseArray.length; i++) {
+        // okay so what if i create a set of if then conditions where if this input under the headerarray[i+1] <-i did this 
+        // because I wanted to ensure that the headerarray is corrently displaying in regards to being given the i 
+
+
+    };
+
+
+    //this is my constructor function for creating the various form layouts needed 
+    var Responses = function (responseArray) {
+
+        //creating the elements that i will eventually fill and append to our main cont element of main
+        var newMainContent = document.createElement("form");
+
+        //here i am setting all of the attributes
+        newMainContent.setAttribute("id", "mainContent");
+
+        //WOOOOHOOOOOO i got my loop to work the first time around, the only issue is that im not sure if i like that each of these inputs now is identified as the same thing..oh wait the name!! nevermind lol
+        for (i = 0; i < responseArray.length; i++) {
+            var responseInput = document.createElement("input");
+            var responseTextContent = responseArray[i];
+            var responseText = document.createTextNode(responseTextContent);
+
+            responseInput.setAttribute("type", "button");
+            responseInput.setAttribute("value", responseArray[i]);
+            responseInput.setAttribute("name", responseArray[i]);
+            responseInput.setAttribute("class", "startBtn");
+
+            responseInput.appendChild(responseText);
+
+            newMainContent.appendChild(responseInput);
+            document.getElementById("mainParentEl").appendChild(newMainContent);
+
+
+        };
+    };
+};
+// function quizStartForm() {
+//     //so lets rework what we need to add in here and 
+
+//     var newtextContent = quizFormatArray[i].stimulus;
+
+//     var questionOne = document.createTextNode(newtextContent);
+
+//     newBigText.setAttribute("class", "bigText");
+
+//     newBigText.appendChild(questionOne);
+//     document.getElementById("mainParentEl").appendChild(newBigText);
+
+
+// };
 // ---------------------------------------------    FUNCTION: REDESIGN OF HTML FOR FIRST QUESTION IN JAVASCRIPT ---------------------------------------------
-function quizStart (){
+// function quizStart() {
+//     quizStartForm();
+//     setInterval()
 
-var mainVar = document.getElementsByTagName("main");
-
-// and i am going to do that by using the innerhtml tag because i'll be able to change this completely 
-mainVar[0].innerHTML = ""; 
-
-var Questions = function (arrayIndex){
-    var newBigText = document.createElement("h1");
-    var newtextContent = questions[arrayIndex];
-
-    var questionOne = document.createTextNode(newtextContent);
-
-    newBigText.setAttribute("id","bigText");
-
-    newBigText.appendChild(questionOne);
-    document.getElementById("mainParentEl").appendChild(newBigText);
-
-};
-
-//this calls the constructor function
-var question1 = new Questions(0);
+// };
 
 
-//this is my constructor function for creating the various form layouts needed 
-var Responses = function (responseArray){
-    //creating the elements that i will eventually fill and append to our main cont element of main
-var newMainContent = document.createElement("form");
-
-//here i am setting all of the attributes
-newMainContent.setAttribute("id", "mainContent");
-
-//WOOOOHOOOOOO i got my loop to work the first time around, the only issue is that im not sure if i like that each of these inputs now is identified as the same thing..oh wait the name!! nevermind lol
-for (i=0; i<responseArray.length; i++){
-var responseInput = document.createElement("input");
-var responseTextContent = responseArray[i];
-var responseText = document.createTextNode(responseTextContent);
-
-responseInput.setAttribute("type", "button");
-responseInput.setAttribute("value", responseArray[i]);
-responseInput.setAttribute("name", responseArray[i]);
-responseInput.setAttribute("class", "startBtn");
-
-responseInput.appendChild(responseText);
-
-newMainContent.appendChild(responseInput);
-document.getElementById("mainParentEl").appendChild(newMainContent);
-
-};
-};
-
-//this repitition needs to be made simpler, i know there are certain things that have to be the same but im left unsure on how to make similar things line up in a way
-var responseSet1 = new Responses(response1);
-
-
-
-
-// mainVar.appendChild(newLabel);
-console.log(scoreAmount);
-
-
-};
-var startQuizBtn = document.getElementById("startBtn");
-
-//this will officially get everything started for our user
-startQuizBtn.addEventListener("click", quizStart);
-
-
-
+startQuizBtn.addEventListener("click", startQuiz);
 
