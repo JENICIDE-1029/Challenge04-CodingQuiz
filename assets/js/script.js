@@ -11,6 +11,8 @@ var mainVar = document.getElementsByTagName("main");
 
 var timer;
 var timerCount;
+//this is the variable that will be used to determine if the quiz is complete or not
+var isComplete = false;
 
 var questionCount = 0;
 
@@ -37,13 +39,20 @@ function startQuiz() {
     startTimer();
 };
 
-
+//brings our timer to life and adds the functionality to end the quiz if the timer hits 0 or if the quiz is complete in the time given
 function startTimer() {
     //this is the timer that will be used to count down from 60 seconds
     timer = setInterval(function () {
         timerCount--;
         timerElement.textContent = timerCount;
         //this is the condition that will end the quiz if the timer hits 0
+        if (timerCount >= 0) {
+            if (isComplete && timerCount > 0) {
+                clearInterval(timer);
+                endQuiz();
+            }
+        }
+
         if (timerCount === 0) {
             clearInterval(timer);
             endQuiz();
