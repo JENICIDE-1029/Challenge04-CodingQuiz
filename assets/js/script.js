@@ -130,6 +130,8 @@ function renderQuestions() {
 function endQuiz() {
     //ending the timer 
     clearInterval(timer);
+    questionCount = 0;
+    isComplete = false;
 
     //working with the elements we got
     bigText.textContent = "All done!";
@@ -195,7 +197,8 @@ function submitScore() {
 function viewHighScores() {
 
     //stopping our timer in its tracks
-    clearInterval(timer);
+    clearInterval(timerCount);
+    timerCount = 0;
 
 
     //working with the elements already on the page
@@ -211,12 +214,13 @@ function viewHighScores() {
     //changing the attributes/style of our new elements
     viewHigh.style.display = "";
     clearScores.textContent = "Clear Scores";
-    startOver.textContent = "Start Over";
+    startOver.textContent = "Try Again";
     clearScores.addEventListener("click", clearScores);
     startOver.addEventListener("click", startOver);
 
     //we need to grab our local storage for high scores along with the initals entered and have a loop that creates them for us along with appending them 
     getHighScores();
+    
     for (i = 0; i < highScores.length; i++) {
         var highScore = highScores[i];
         var highScoreElement = document.createElement("p");
@@ -225,17 +229,17 @@ function viewHighScores() {
 
     }
 
-
     //adding our new element to their parents
     mainMiddleContent.appendChild(startOver);
     mainMiddleContent.appendChild(clearScores);
 
-
-
-
 }
 
 function clearScores() {
+    localStorage.clear();
+    viewHighScores();
+
+    // mainMiddleContent.innerHTML = "";
 
 }
 
@@ -245,6 +249,8 @@ function startOver() {
 
 //we are adding an onclick event to each button that will evaluate whether the response contents matches the correct answer property we added to our object
 function evalResponse(event) {
+    event.preventDefault();
+
     //so for each of our buttons we are adding the textcontent of what the response is and the value of what the correct answer is so we are grabbing those and comparing them to see if they match and handle them accordingly
     var response = event.target.textContent
     var responseAnswer = event.target.value
@@ -260,10 +266,10 @@ function evalResponse(event) {
         scoreAmount -= 13;
         labelMessage.textContent = labelArray[2];
     }
-
+    questionCount++;
     //then we also are going to add to out questtion counter to ensure that our loop is running along as it should onto the next question with of course stopping itself at thhe last question
     if (questionCount < quizFormatArray.length - 1) {
-        questionCount++;
+
         isComplete = true;
         renderQuestions();
     } else {
