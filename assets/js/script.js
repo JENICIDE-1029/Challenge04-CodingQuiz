@@ -14,7 +14,9 @@ var labelMessage = document.getElementById("labelMessage");
 
 var viewHigh = document.getElementById("highScoreBtn");
 
-
+var response;
+var responseAnswer;
+var highScores;
 
 var timer;
 var timerCount;
@@ -35,6 +37,16 @@ var scoreAmount = 0;
 function init() {
     getHighScores();
 };
+
+function getHighScores() {
+    var storedScores = JSON.parse(localStorage.getItem("highScores"));
+    if (storedScores === null) {
+        highScores = [];
+    } else {
+
+        highScores = storedScores;
+    }
+}
 
 
 function startQuiz() {
@@ -67,10 +79,11 @@ function startTimer() {
         }
     }, 1000);
 };
-var response;
-var responseAnswer;
+
 //how can i make it so the questions appear, then change after one of them has been selected? while of course keeping track of the score and removing time from the timer when the wrong question is asked along with displaying wrong or correct 
 function renderQuestions() {
+
+    //altering what we have 
     startQuizBtn.style.display = "none";
     labelMessage.textContent = "";
     viewHigh.style.display = "none";
@@ -113,6 +126,7 @@ function renderQuestions() {
 
 };
 
+//when the user runs out of time or completes the quiz this function will take off and present them with the end page of the quiz with their results and prompt to save their score
 function endQuiz() {
     //ending the timer 
     clearInterval(timer);
@@ -135,9 +149,10 @@ function endQuiz() {
     enterInitialsText.textContent = "Enter your initials: ";
     submitInitials.textContent = "Submit Score";
     submitInitials.style.display = "block";
-    startAgain.addEventListener("click", startQuiz);
+    startAgain.addEventListener("click", startOver);
     initials.setAttribute("type", "text");
     submitInitials.addEventListener("click", submitScore);
+    initials.setAttribute("id", "initials");
 
     //adding styling
     startAgain.textContent = "Take Quiz Again?";
@@ -150,16 +165,28 @@ function endQuiz() {
     mainMiddleContent.appendChild(submitInitials);
     mainMiddleContent.appendChild(startAgain);
 
-
-
-
 }
 
-function submitScore() {
 
-    //need to figure out how to properly save the score and initials to local storage, like what are the steps
-    localStorage.setItem("score", scoreAmount);
-    localStorage.setItem("initials", initials.value);
+function submitScore() {
+    //we are retrieveing the scre and initials from user
+    var score = scoreAmount;
+    var initials = document.getElementById("initials");
+
+    //now we are adding this to our array
+    highScores.push({
+        score: score,
+        initials: initials.value
+    });
+
+    //making sure we are sorting the scores from highest to lowest
+    highScores.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    viewHighScores();
+
 
 }
 
@@ -169,6 +196,7 @@ function viewHighScores() {
 
     //stopping our timer in its tracks
     clearInterval(timer);
+
 
     //working with the elements already on the page
     bigText.textContent = "HighScores";
@@ -188,6 +216,15 @@ function viewHighScores() {
     startOver.addEventListener("click", startOver);
 
     //we need to grab our local storage for high scores along with the initals entered and have a loop that creates them for us along with appending them 
+    getHighScores();
+    for (i = 0; i < highScores.length; i++) {
+        var highScore = highScores[i];
+        var highScoreElement = document.createElement("p");
+        highScoreElement.textContent = highScore.initials + " - " + highScore.score;
+        mainMiddleContent.appendChild(highScoreElement);
+
+    }
+
 
     //adding our new element to their parents
     mainMiddleContent.appendChild(startOver);
@@ -212,19 +249,22 @@ function evalResponse(event) {
     var response = event.target.textContent
     var responseAnswer = event.target.value
 
+    //if the response selected matches the correct answer then we need to spit out the right label message and points 
     if (response === responseAnswer) {
         //lets add the "correct" message to our label at the end of our questions
         labelMessage.textContent = labelArray[1];
         scoreAmount += 15;
-    }
+    } //if this is not the case then we need to give a different message and remove points AND time 
     else {
         timerCount -= 10;
         scoreAmount -= 13;
         labelMessage.textContent = labelArray[2];
     }
 
+    //then we also are going to add to out questtion counter to ensure that our loop is running along as it should onto the next question with of course stopping itself at thhe last question
     if (questionCount < quizFormatArray.length - 1) {
         questionCount++;
+        isComplete = true;
         renderQuestions();
     } else {
         endQuiz();
@@ -255,6 +295,8 @@ var quizFormatArray = [
         responses: ["JavaScript", "terminal/bash", "for loops", "Console.log"]
     }
 ];
+
+init();
 
 //adding our event listeners to our buttons
 startQuizBtn.addEventListener("click", startQuiz);
