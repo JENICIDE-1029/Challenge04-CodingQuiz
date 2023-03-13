@@ -114,75 +114,87 @@ function renderQuestions() {
 };
 
 function endQuiz() {
+    //ending the timer 
+    clearInterval(timer);
+
+    //working with the elements we got
     bigText.textContent = "All done!";
     mainMiddleContent.innerHTML = "";
+    viewHigh.style.display = "";
+
+    //creating new elements
     var scoreTotal = document.createElement("p");
     var enterInitialsText = document.createElement("p");
     var startAgain = document.createElement("button");
-
-    viewHigh.style.display = "";
-
-
     var initials = document.createElement("input");
     var submitInitials = document.createElement("button");
 
+    //altering the attributes  
+    labelMessage.textContent = "";
     scoreTotal.textContent = "Final Score: " + scoreAmount;
     enterInitialsText.textContent = "Enter your initials: ";
-
     submitInitials.textContent = "Submit Score";
-    enterInitialsText.style.display = "inline";
+    submitInitials.style.display = "block";
+    startAgain.addEventListener("click", startQuiz);
     initials.setAttribute("type", "text");
     submitInitials.addEventListener("click", submitScore);
-    submitInitials.style.display = "block";
 
-    startAgain.addEventListener("click", startQuiz);
+    //adding styling
     startAgain.textContent = "Take Quiz Again?";
+    enterInitialsText.style.display = "inline";
 
-
+    //appending the new elements to their parents
     mainMiddleContent.appendChild(scoreTotal);
     mainMiddleContent.appendChild(enterInitialsText);
     mainMiddleContent.appendChild(initials);
     mainMiddleContent.appendChild(submitInitials);
     mainMiddleContent.appendChild(startAgain);
 
-    clearInterval(timer);
-    labelMessage.textContent = "";
+
+
 
 }
 
 function submitScore() {
+
+    //need to figure out how to properly save the score and initials to local storage, like what are the steps
     localStorage.setItem("score", scoreAmount);
     localStorage.setItem("initials", initials.value);
 
 }
 
-viewHigh.addEventListener("click", viewHighScores);
+
 
 function viewHighScores() {
+
+    //stopping our timer in its tracks
+    clearInterval(timer);
+
+    //working with the elements already on the page
     bigText.textContent = "HighScores";
     mainMiddleContent.innerHTML = "";
     startQuizBtn.style.display = "none";
+    labelMessage.textContent = "";
 
+    //creating new elements
     var clearScores = document.createElement("button");
     var startOver = document.createElement("button");
 
-
+    //changing the attributes/style of our new elements
     viewHigh.style.display = "";
-
     clearScores.textContent = "Clear Scores";
     startOver.textContent = "Start Over";
+    clearScores.addEventListener("click", clearScores);
+    startOver.addEventListener("click", startOver);
 
     //we need to grab our local storage for high scores along with the initals entered and have a loop that creates them for us along with appending them 
 
-    clearScores.addEventListener("click", clearScores);
-
-    startOver.addEventListener("click", startOver);
-
+    //adding our new element to their parents
     mainMiddleContent.appendChild(startOver);
     mainMiddleContent.appendChild(clearScores);
 
-    clearInterval(timer);
-    labelMessage.textContent = "";
+
+
 
 }
 
@@ -244,7 +256,7 @@ var quizFormatArray = [
     }
 ];
 
-//what starts all of our code off
+//adding our event listeners to our buttons
 startQuizBtn.addEventListener("click", startQuiz);
-
+viewHigh.addEventListener("click", viewHighScores);
 
