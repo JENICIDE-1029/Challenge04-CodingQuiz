@@ -1,11 +1,16 @@
 
-
+//needed to attach the event listener to the start button
 var startQuizBtn = document.getElementById("startBtn");
+//will grab the element from the html that will display the timer
 var timerElement = document.getElementById("timerEl");
+
+//this will grab the element from the html and initally display the welcome message but then switch over to the questions once the quiz begins
 var bigText = document.getElementById("bigText");
+
+//this will host all of our answers to the questions
 var mainMiddleContent = document.getElementById("mainMiddleContent");
+//this will tell the user if their answer was correct or not
 var labelMessage = document.getElementById("labelMessage");
-var mainVar = document.getElementsByTagName("main");
 
 
 
@@ -34,7 +39,7 @@ function startQuiz() {
     scoreAmount = 0;
     timerCount = 75;
     //this sets off the function to make our questions appear
-    // renderQuestions();
+    renderQuestions();
     //this sets off the function to make our timer begin
     startTimer();
 };
@@ -60,8 +65,52 @@ function startTimer() {
     }, 1000);
 };
 
+//how can i make it so the questions appear, then change after one of them has been selected? while of course keeping track of the score and removing time from the timer when the wrong question is asked along with displaying wrong or correct 
+function renderQuestions() {
+    for (var i = 0; i < quizFormatArray.length - 1; i++) {
+        var quizFormat = quizFormatArray[i];
+        bigText.textContent = quizFormat.stimulus;
+        //we don't need anything in here but we will use it to add the question response buttons
+        mainMiddleContent.innerHTML = "";
 
-// buttonTest.addEventListener("click", increment);
+        //now we are looping through the responses of our first question
+        for (var j = 0; j < quizFormat.responses.length; j++) {
+            var response = quizFormat.responses[j];
+            var responseBtn = document.createElement("button");
+            var responseAnswer = quizFormat.correctAnswer[0];
+
+
+            // responseBtn.setAttribute("class", "btn btn-primary btn-block");
+            responseBtn.setAttribute("value", response);
+            responseBtn.textContent = response;
+
+
+
+
+            //so we wouldnt include the () after the function name because that would call the function immediatley and we want it to only go off when the button is clicked        
+            responseBtn.onclick = evalResponse;
+            mainMiddleContent.appendChild(responseBtn);
+        }
+
+    }
+
+};
+
+//we are adding an onclick event to each button that will evaluate whether the response contents matches the correct answer property we added to our object
+function evalResponse() {
+    if (response === responseAnswer) {
+        //lets add the "correct" message to our label at the end of our questions
+        labelMessage.textContent = labelArray[1];
+        scoreAmount + 15;
+    }
+    if (response != responseAnswer) {
+        timerCount -= 10;
+        scoreAmount - 13;
+        labelMessage.textContent = labelArray[2];
+    }
+
+
+}
 
 
 var quizFormatArray = [
@@ -89,86 +138,4 @@ var quizFormatArray = [
 
 ];
 
-// console.log(quizFormatArray[0].stimulus);
-
-while (questionCount[0])
-
-
-    //this is the conjunctor function that will make our title appear
-    var Questions = function (arrayIndex) {
-
-        var newtextContent = quizFormatArray[i];
-
-        var questionOne = document.createTextNode(newtextContent);
-
-        newBigText.setAttribute("class", "bigText");
-
-        newBigText.appendChild(questionOne);
-        document.getElementById("mainParentEl").appendChild(newBigText);
-
-    };
-
-//i think in order to have the reponses change accordingly, i will need to attatch them somehow to the questions 
-//i am trying to add the click event procedure to all of my buttons so that they will show the next question and set of responses
-var NextQuestion = function (responseArray) {
-    for (i = 0; i < responseArray.length; i++) {
-        // okay so what if i create a set of if then conditions where if this input under the headerarray[i+1] <-i did this 
-        // because I wanted to ensure that the headerarray is corrently displaying in regards to being given the i 
-
-
-    };
-
-
-    //this is my constructor function for creating the various form layouts needed 
-    var Responses = function (responseArray) {
-
-        //creating the elements that i will eventually fill and append to our main cont element of main
-        var newMainContent = document.createElement("form");
-
-        //here i am setting all of the attributes
-        newMainContent.setAttribute("id", "mainContent");
-
-        //WOOOOHOOOOOO i got my loop to work the first time around, the only issue is that im not sure if i like that each of these inputs now is identified as the same thing..oh wait the name!! nevermind lol
-        for (i = 0; i < responseArray.length; i++) {
-            var responseInput = document.createElement("input");
-            var responseTextContent = responseArray[i];
-            var responseText = document.createTextNode(responseTextContent);
-
-            responseInput.setAttribute("type", "button");
-            responseInput.setAttribute("value", responseArray[i]);
-            responseInput.setAttribute("name", responseArray[i]);
-            responseInput.setAttribute("class", "startBtn");
-
-            responseInput.appendChild(responseText);
-
-            newMainContent.appendChild(responseInput);
-            document.getElementById("mainParentEl").appendChild(newMainContent);
-
-
-        };
-    };
-};
-// function quizStartForm() {
-//     //so lets rework what we need to add in here and 
-
-//     var newtextContent = quizFormatArray[i].stimulus;
-
-//     var questionOne = document.createTextNode(newtextContent);
-
-//     newBigText.setAttribute("class", "bigText");
-
-//     newBigText.appendChild(questionOne);
-//     document.getElementById("mainParentEl").appendChild(newBigText);
-
-
-// };
-// ---------------------------------------------    FUNCTION: REDESIGN OF HTML FOR FIRST QUESTION IN JAVASCRIPT ---------------------------------------------
-// function quizStart() {
-//     quizStartForm();
-//     setInterval()
-
-// };
-
-
 startQuizBtn.addEventListener("click", startQuiz);
-
