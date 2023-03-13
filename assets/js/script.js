@@ -80,40 +80,71 @@ function renderQuestions() {
         for (var j = 0; j < quizFormat.responses.length; j++) {
             response = quizFormat.responses[j];
             var responseBtn = document.createElement("button");
-            responseAnswer = quizFormat.correctAnswer[0];
+            responseAnswer = quizFormat.correctAnswer;
 
 
             // responseBtn.setAttribute("class", "btn btn-primary btn-block");
             responseBtn.setAttribute("value", response);
+            responseBtn.setAttribute("value", responseAnswer);
+
             responseBtn.textContent = response;
 
 
 
 
             //so we wouldnt include the () after the function name because that would call the function immediatley and we want it to only go off when the button is clicked        
-            responseBtn.onclick = evalResponse;
+            responseBtn.addEventListener("click", evalResponse);
             mainMiddleContent.appendChild(responseBtn);
         }
 
+        //once we get to the last question we will want to make sure that it's aware that the quiz is complete
+        if (i === quizFormatArray.length - 1) {
+            isComplete = true;
+
+        } else {
+            return;
+        }
+        endQuiz();
     }
 
 };
 
+function endQuiz() {
+    bigText.textContent = "All done!";
+    mainMiddleCOntent.innerHTML = "";
+    var scoreTotal = document.createElement("p");
+    scoreTotal.textContent = "Final Score: " + scoreAmount;
+    var initials = document.createElement("input");
+    initials.setAttribute("type", "text");
+}
+
+
+
 //we are adding an onclick event to each button that will evaluate whether the response contents matches the correct answer property we added to our object
-function evalResponse() {
+function evalResponse(event) {
+    //so for each of our buttons we are adding the textcontent of what the response is and the value of what the correct answer is so we are grabbing those and comparing them to see if they match and handle them accordingly
+    var response = event.target.textContent
+    var responseAnswer = event.target.value
+
+
     if (response === responseAnswer) {
         //lets add the "correct" message to our label at the end of our questions
         labelMessage.textContent = labelArray[1];
-        scoreAmount + 15;
+        scoreAmount += 15;
     }
-    if (response !== responseAnswer) {
+    else {
         timerCount -= 10;
-        scoreAmount - 13;
+        scoreAmount -= 13;
         labelMessage.textContent = labelArray[2];
     }
+    console.log(scoreAmount);
 
 
-}
+
+};
+
+
+
 
 
 var quizFormatArray = [
@@ -141,4 +172,7 @@ var quizFormatArray = [
 
 ];
 
+
 startQuizBtn.addEventListener("click", startQuiz);
+
+
