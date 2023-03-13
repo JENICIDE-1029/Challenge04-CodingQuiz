@@ -12,6 +12,8 @@ var mainMiddleContent = document.getElementById("mainMiddleContent");
 //this will tell the user if their answer was correct or not
 var labelMessage = document.getElementById("labelMessage");
 
+var viewHigh = document.getElementById("highScoreBtn");
+
 
 
 var timer;
@@ -71,6 +73,7 @@ var responseAnswer;
 function renderQuestions() {
     startQuizBtn.style.display = "none";
     labelMessage.textContent = "";
+    viewHigh.style.display = "none";
 
     for (var i = 0; i < quizFormatArray.length; i++) {
         var quizFormat = quizFormatArray[questionCount];
@@ -114,26 +117,88 @@ function endQuiz() {
     bigText.textContent = "All done!";
     mainMiddleContent.innerHTML = "";
     var scoreTotal = document.createElement("p");
+    var enterInitialsText = document.createElement("p");
+    var startAgain = document.createElement("button");
+
+    viewHigh.style.display = "";
+
+
     var initials = document.createElement("input");
-    // var submitInitials = document.createElement("button");
+    var submitInitials = document.createElement("button");
 
     scoreTotal.textContent = "Final Score: " + scoreAmount;
+    enterInitialsText.textContent = "Enter your initials: ";
 
+    submitInitials.textContent = "Submit Score";
+    enterInitialsText.style.display = "inline";
     initials.setAttribute("type", "text");
+    submitInitials.addEventListener("click", submitScore);
+    submitInitials.style.display = "block";
+
+    startAgain.addEventListener("click", startQuiz);
+    startAgain.textContent = "Take Quiz Again?";
+
 
     mainMiddleContent.appendChild(scoreTotal);
+    mainMiddleContent.appendChild(enterInitialsText);
     mainMiddleContent.appendChild(initials);
+    mainMiddleContent.appendChild(submitInitials);
+    mainMiddleContent.appendChild(startAgain);
+
+    clearInterval(timer);
+    labelMessage.textContent = "";
 
 }
 
+function submitScore() {
+    localStorage.setItem("score", scoreAmount);
+    localStorage.setItem("initials", initials.value);
 
+}
+
+viewHigh.addEventListener("click", viewHighScores);
+
+function viewHighScores() {
+    bigText.textContent = "HighScores";
+    mainMiddleContent.innerHTML = "";
+    startQuizBtn.style.display = "none";
+
+    var clearScores = document.createElement("button");
+    var startOver = document.createElement("button");
+
+
+    viewHigh.style.display = "";
+
+    clearScores.textContent = "Clear Scores";
+    startOver.textContent = "Start Over";
+
+    //we need to grab our local storage for high scores along with the initals entered and have a loop that creates them for us along with appending them 
+
+    clearScores.addEventListener("click", clearScores);
+
+    startOver.addEventListener("click", startOver);
+
+    mainMiddleContent.appendChild(startOver);
+    mainMiddleContent.appendChild(clearScores);
+
+    clearInterval(timer);
+    labelMessage.textContent = "";
+
+}
+
+function clearScores() {
+
+}
+
+function startOver() {
+
+}
 
 //we are adding an onclick event to each button that will evaluate whether the response contents matches the correct answer property we added to our object
 function evalResponse(event) {
     //so for each of our buttons we are adding the textcontent of what the response is and the value of what the correct answer is so we are grabbing those and comparing them to see if they match and handle them accordingly
     var response = event.target.textContent
     var responseAnswer = event.target.value
-
 
     if (response === responseAnswer) {
         //lets add the "correct" message to our label at the end of our questions
@@ -152,16 +217,9 @@ function evalResponse(event) {
     } else {
         endQuiz();
     }
-    console.log(scoreAmount);
-
-
-
 };
 
-
-
-
-
+//this array holds all of our questions, their respones and the correct answers
 var quizFormatArray = [
     {
         stimulus: "Commonly used data types DO not include: ",
@@ -184,10 +242,9 @@ var quizFormatArray = [
         correctAnswer: "Console.log",
         responses: ["JavaScript", "terminal/bash", "for loops", "Console.log"]
     }
-
 ];
 
-
+//what starts all of our code off
 startQuizBtn.addEventListener("click", startQuiz);
 
 
