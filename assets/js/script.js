@@ -188,16 +188,12 @@ function submitScore() {
 
     localStorage.setItem("highScores", JSON.stringify(highScores));
     viewHighScores();
-
-
 }
 
-
-
 function viewHighScores() {
-
+    getHighScores();
     //stopping our timer in its tracks
-    clearInterval(timerCount);
+    timerElement.textContent = 0;
     timerCount = 0;
 
 
@@ -208,19 +204,22 @@ function viewHighScores() {
     labelMessage.textContent = "";
 
     //creating new elements
-    var clearScores = document.createElement("button");
-    var startOver = document.createElement("button");
+    var clearScoreEl = document.createElement("button");
+    var startOverEl = document.createElement("button");
 
     //changing the attributes/style of our new elements
     viewHigh.style.display = "";
-    clearScores.textContent = "Clear Scores";
-    startOver.textContent = "Try Again";
-    clearScores.addEventListener("click", clearScores);
-    startOver.addEventListener("click", startOver);
+    clearScoreEl.textContent = "Clear Scores";
+    startOverEl.textContent = "Try Again";
+    clearScoreEl.addEventListener("click", clearScores);
+    startOverEl.addEventListener("click", startOver);
 
     //we need to grab our local storage for high scores along with the initals entered and have a loop that creates them for us along with appending them 
-    getHighScores();
-    
+
+    //adding our new element to their parents
+    mainMiddleContent.appendChild(startOverEl);
+    mainMiddleContent.appendChild(clearScoreEl);
+
     for (i = 0; i < highScores.length; i++) {
         var highScore = highScores[i];
         var highScoreElement = document.createElement("p");
@@ -228,16 +227,12 @@ function viewHighScores() {
         mainMiddleContent.appendChild(highScoreElement);
 
     }
-
-    //adding our new element to their parents
-    mainMiddleContent.appendChild(startOver);
-    mainMiddleContent.appendChild(clearScores);
-
 }
 
 function clearScores() {
+    getHighScores();
     localStorage.clear();
-    viewHighScores();
+    // viewHighScores();
 
     // mainMiddleContent.innerHTML = "";
 
