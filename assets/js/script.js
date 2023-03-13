@@ -19,6 +19,7 @@ var timerCount;
 //this is the variable that will be used to determine if the quiz is complete or not
 var isComplete = false;
 
+//this variable is helping us move along our questions in our loop in the renderQuestions function
 var questionCount = 0;
 
 //okay so by putting in the text of the element im going to use as my header just makes everything so much easier
@@ -68,10 +69,11 @@ var response;
 var responseAnswer;
 //how can i make it so the questions appear, then change after one of them has been selected? while of course keeping track of the score and removing time from the timer when the wrong question is asked along with displaying wrong or correct 
 function renderQuestions() {
-
+    startQuizBtn.style.display = "none";
+    labelMessage.textContent = "";
 
     for (var i = 0; i < quizFormatArray.length; i++) {
-        var quizFormat = quizFormatArray[i];
+        var quizFormat = quizFormatArray[questionCount];
         bigText.textContent = quizFormat.stimulus;
         //we don't need anything in here but we will use it to add the question response buttons
         mainMiddleContent.innerHTML = "";
@@ -89,33 +91,39 @@ function renderQuestions() {
 
             responseBtn.textContent = response;
 
-
-
-
             //so we wouldnt include the () after the function name because that would call the function immediatley and we want it to only go off when the button is clicked        
             responseBtn.addEventListener("click", evalResponse);
             mainMiddleContent.appendChild(responseBtn);
+
         }
 
         //once we get to the last question we will want to make sure that it's aware that the quiz is complete
         if (i === quizFormatArray.length - 1) {
             isComplete = true;
+            endQuiz();
 
         } else {
+            isComplete = false;
             return;
         }
-        endQuiz();
     }
 
 };
 
 function endQuiz() {
     bigText.textContent = "All done!";
-    mainMiddleCOntent.innerHTML = "";
+    mainMiddleContent.innerHTML = "";
     var scoreTotal = document.createElement("p");
-    scoreTotal.textContent = "Final Score: " + scoreAmount;
     var initials = document.createElement("input");
+    // var submitInitials = document.createElement("button");
+
+    scoreTotal.textContent = "Final Score: " + scoreAmount;
+
     initials.setAttribute("type", "text");
+
+    mainMiddleContent.appendChild(scoreTotal);
+    mainMiddleContent.appendChild(initials);
+
 }
 
 
@@ -137,6 +145,13 @@ function evalResponse(event) {
         scoreAmount -= 13;
         labelMessage.textContent = labelArray[2];
     }
+
+    if (questionCount < quizFormatArray.length - 1) {
+        questionCount++;
+        renderQuestions();
+    } else {
+        endQuiz();
+    }
     console.log(scoreAmount);
 
 
@@ -154,7 +169,7 @@ var quizFormatArray = [
         responses: ["strings", "booleans", "Alerts", "numbers"]
     }, {
         stimulus: "The condition in an if/else statement is enclosed with ________.",
-        correctAnswer: "curly brackets",
+        correctAnswer: "Curly brackets",
         responses: ["quotes", "Curly brackets", "paranthesis", "square brackets"]
     }, {
         stimulus: "Arrays in JavaScript can be used to store ________.",
