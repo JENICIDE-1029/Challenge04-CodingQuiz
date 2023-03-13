@@ -64,10 +64,13 @@ function startTimer() {
         }
     }, 1000);
 };
-
+var response;
+var responseAnswer;
 //how can i make it so the questions appear, then change after one of them has been selected? while of course keeping track of the score and removing time from the timer when the wrong question is asked along with displaying wrong or correct 
 function renderQuestions() {
-    for (var i = 0; i < quizFormatArray.length - 1; i++) {
+
+
+    for (var i = 0; i < quizFormatArray.length; i++) {
         var quizFormat = quizFormatArray[i];
         bigText.textContent = quizFormat.stimulus;
         //we don't need anything in here but we will use it to add the question response buttons
@@ -75,9 +78,9 @@ function renderQuestions() {
 
         //now we are looping through the responses of our first question
         for (var j = 0; j < quizFormat.responses.length; j++) {
-            var response = quizFormat.responses[j];
+            response = quizFormat.responses[j];
             var responseBtn = document.createElement("button");
-            var responseAnswer = quizFormat.correctAnswer[0];
+            responseAnswer = quizFormat.correctAnswer[0];
 
 
             // responseBtn.setAttribute("class", "btn btn-primary btn-block");
@@ -103,7 +106,7 @@ function evalResponse() {
         labelMessage.textContent = labelArray[1];
         scoreAmount + 15;
     }
-    if (response != responseAnswer) {
+    if (response !== responseAnswer) {
         timerCount -= 10;
         scoreAmount - 13;
         labelMessage.textContent = labelArray[2];
