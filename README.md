@@ -10,7 +10,7 @@ The goal of this assignment was to select and generate HTML elements using API's
 <br>
 You can check out the deployed application from the link below:
 <br>
-[https://jenjen0219.github.io/Challenge04-CodingQuiz/](https://jenjen0219.github.io/Challenge04-CodingQuiz/)
+[https://jenjen0219.github.io/CodingQuiz/](https://jenjen0219.github.io/CodingQuiz/)
 
 ## Table of Contents
 - [Technologies](#technologies)
