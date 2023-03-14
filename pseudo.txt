@@ -1,5 +1,0 @@
-
-
-- there needs to be a function for game over that will trigger either when the time is up or when 
-WHEN the game is over
-THEN I can save my initials and score

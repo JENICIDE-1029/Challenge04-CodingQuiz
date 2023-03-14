@@ -12,25 +12,32 @@ var mainMiddleContent = document.getElementById("mainMiddleContent");
 //this will tell the user if their answer was correct or not
 var labelMessage = document.getElementById("labelMessage");
 
+//grabbing the button to show high scores
 var viewHigh = document.getElementById("highScoreBtn");
 
+//represents the different answers to questions
 var response;
+//represents the correct response to the question
 var responseAnswer;
+
+//the loocal storage variable for our scores
 var highScores;
+
 
 var timer;
 var timerCount;
+
+
 //this is the variable that will be used to determine if the quiz is complete or not
 var isComplete = false;
 
 //this variable is helping us move along our questions in our loop in the renderQuestions function
 var questionCount = 0;
 
-//okay so by putting in the text of the element im going to use as my header just makes everything so much easier
-
-
+//an array of different text to display for a label
 var labelArray = ["Correct! :) ", "Wrong! :( "]
 
+//amount that the user scored
 var scoreAmount = 0;
 
 //this will grab the high scores from local storage
@@ -237,7 +244,7 @@ function clearScores() {
 
 function startOver() {
     //now everything has to be set to look like the start page again
-    bigText.textContent = "WELCOME TO THE CODE QUIZ";
+    bigText.textContent = "WELCOME TO THE CODING QUIZ";
     mainMiddleContent.innerHTML = " This quiz contains 5 multiple choice questions that must be answered within 75 seconds. Any wrong answers will automatically reduce your time available by 10 seconds. So whenever you're ready, click the start button below!";
     startQuizBtn.style.display = "";
     labelMessage.textContent = "Created by Jennifer Gutierrez Manjares";
