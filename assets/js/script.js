@@ -29,7 +29,7 @@ var questionCount = 0;
 //okay so by putting in the text of the element im going to use as my header just makes everything so much easier
 
 
-var labelArray = ["Created by Jennifer Gutierrez Manjares", "Correct! :) ", "Wrong! :( "]
+var labelArray = ["Correct! :) ", "Wrong! :( "]
 
 var scoreAmount = 0;
 
@@ -230,16 +230,18 @@ function viewHighScores() {
 }
 
 function clearScores() {
-    getHighScores();
     localStorage.clear();
-    // viewHighScores();
-
-    // mainMiddleContent.innerHTML = "";
+    viewHighScores();
 
 }
 
 function startOver() {
-
+    //now everything has to be set to look like the start page again
+    bigText.textContent = "WELCOME TO THE CODE QUIZ";
+    mainMiddleContent.innerHTML = " This quiz contains 5 multiple choice questions that must be answered within 75 seconds. Any wrong answers will automatically reduce your time available by 10 seconds. So whenever you're ready, click the start button below!";
+    startQuizBtn.style.display = "";
+    labelMessage.textContent = "Created by Jennifer Gutierrez Manjares";
+    viewHigh.style.display = "";
 }
 
 //we are adding an onclick event to each button that will evaluate whether the response contents matches the correct answer property we added to our object
@@ -253,13 +255,13 @@ function evalResponse(event) {
     //if the response selected matches the correct answer then we need to spit out the right label message and points 
     if (response === responseAnswer) {
         //lets add the "correct" message to our label at the end of our questions
-        labelMessage.textContent = labelArray[1];
+        labelMessage.textContent = labelArray[0];
         scoreAmount += 15;
     } //if this is not the case then we need to give a different message and remove points AND time 
     else {
         timerCount -= 10;
         scoreAmount -= 13;
-        labelMessage.textContent = labelArray[2];
+        labelMessage.textContent = labelArray[1];
     }
     questionCount++;
     //then we also are going to add to out questtion counter to ensure that our loop is running along as it should onto the next question with of course stopping itself at thhe last question
